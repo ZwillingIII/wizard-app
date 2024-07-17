@@ -5,7 +5,6 @@
 vendor
 ./vendor/*
 ./vendor
-./vendor/*
 ./*/vendor
 
 .idea
