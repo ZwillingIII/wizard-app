@@ -2,21 +2,28 @@
 
 namespace App\Helpers;
 
-use GuzzleHttp\Client;
+use \GuzzleHttp\Client;
 
 class Wizard
 {
     const WIZARD_HTTP = 'https://wizard-world-api.herokuapp.com';
 
-    public $client = null;
-
     public function __construct()
     {
-        $this->client = new Client([]);
     }
 
-    public function getElixirs()
+    public static function getElixirs()
     {
-        return $this->client->request('GET', self::WIZARD_HTTP . '/Elixirs');
+        return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Elixirs')->getBody()->getContents();
+    }
+
+    public static function getSpells()
+    {
+        return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Spells')->getBody()->getContents();
+    }
+
+    public static function getIngredients()
+    {
+        return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Ingredients')->getBody()->getContents();
     }
 }
