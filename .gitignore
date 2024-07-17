@@ -1,3 +1,11 @@
 .env
 ./.env
 ./*/.env
+
+vendor
+./vendor/*
+./vendor
+./vendor/*
+./*/vendor
+
+.idea

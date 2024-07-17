@@ -5,7 +5,8 @@ function env($key, $default = null)
     $value = $_ENV[$key];
 
     if ($value === false) {
-        return value($default);
+//        return value($default);
+        return $default;
     }
 
     switch (strtolower($value)) {
