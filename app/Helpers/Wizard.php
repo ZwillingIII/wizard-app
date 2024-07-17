@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Helpers\Dto\SpellDto;
 use \GuzzleHttp\Client;
 
 class Wizard
@@ -39,6 +40,16 @@ class Wizard
     public function get()
     {
         return (new Client([]))->request('GET', self::$link)->getBody()->getContents();
+    }
+
+    public static function getSpellById(string $id)
+    {
+        try {
+            $data = json_decode((new Client([]))->request('GET', self::WIZARD_HTTP . '/Spells/' . $id)->getBody()->getContents());
+            return new SpellDto($data->id, $data->name, $data->effect, $data->type);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public static function spell(string $id)
