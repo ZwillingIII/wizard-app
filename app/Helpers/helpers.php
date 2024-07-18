@@ -36,7 +36,7 @@ function env($key, $default = null)
 
 function vardump($var)
 {
-    echo '<pre style="background-color:#000000;color:lime;">';
+    echo '<pre style="background-color:#000000;color:lime;padding:10px;">';
     var_dump($var);
     echo '</pre>';
 }
