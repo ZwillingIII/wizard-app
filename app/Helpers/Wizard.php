@@ -17,17 +17,29 @@ class Wizard
 
     public static function getElixirs()
     {
-        return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Elixirs')->getBody()->getContents();
+        try {
+            return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Elixirs')->getBody()->getContents();
+        } catch (\Exception $e) {
+            return Errors::setError($e->getCode(), $e->getMessage());
+        }
     }
 
     public static function getSpells()
     {
-        return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Spells')->getBody()->getContents();
+        try {
+            return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Spells')->getBody()->getContents();
+        } catch (\Exception $e) {
+            return Errors::setError($e->getCode(), $e->getMessage());
+        }
     }
 
     public static function getIngredients()
     {
-        return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Ingredients')->getBody()->getContents();
+        try {
+            return (new Client([]))->request('GET', self::WIZARD_HTTP . '/Ingredients')->getBody()->getContents();
+        } catch (\Exception $e) {
+            return Errors::setError($e->getCode(), $e->getMessage());
+        }
     }
 
     public static function elixir(string $id)
@@ -39,7 +51,11 @@ class Wizard
 
     public function get()
     {
-        return (new Client([]))->request('GET', self::$link)->getBody()->getContents();
+        try {
+            return (new Client([]))->request('GET', self::$link)->getBody()->getContents();
+        } catch (\Exception $e) {
+            return Errors::setError($e->getCode(), $e->getMessage());
+        }
     }
 
     public static function getSpellById(string $id)
@@ -48,7 +64,7 @@ class Wizard
             $data = json_decode((new Client([]))->request('GET', self::WIZARD_HTTP . '/Spells/' . $id)->getBody()->getContents());
             return new SpellDto($data->id, $data->name, $data->effect, $data->type);
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return Errors::setError($e->getCode(), $e->getMessage());
         }
     }
 
